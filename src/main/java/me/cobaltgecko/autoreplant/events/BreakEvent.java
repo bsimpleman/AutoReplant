@@ -32,14 +32,11 @@ public class BreakEvent implements Listener {
         // Check if the player has permission to replant
         if (player.hasPermission("AutoReplant.replant")) {
             // Get the type of the broken block
-            if (block.getType() == Material.WHEAT) {
-                cropBlockType = Material.WHEAT;
-            } else if (block.getType() == Material.POTATOES) {
-                cropBlockType = Material.POTATOES;
-            } else if (block.getType() == Material.CARROTS) {
-                cropBlockType = Material.CARROTS;
-            } else if (block.getType() == Material.BEETROOTS) {
-                cropBlockType = Material.BEETROOTS;
+            switch(block.getType()) {
+                case WHEAT: cropBlockType = Material.WHEAT;
+                case POTATOES: cropBlockType = Material.POTATOES;
+                case CARROTS: cropBlockType = Material.CARROTS;
+                case BEETROOTS: cropBlockType = Material.BEETROOTS;
             }
 
             // Main functionality of the plugin
@@ -73,13 +70,11 @@ public class BreakEvent implements Listener {
         // For loop to find the location of seeds in the player's inventory
         for (int slotIndex = 0; slotIndex < inventory.getSize(); slotIndex++) {
             currentItems = inventory.getItem(slotIndex);
-            if (currentItems != null) {
-                if (currentItems.getType() == seedType) {
-                    seedIndexLocation = slotIndex;
+            if (currentItems != null && currentItems.getType() == seedType) {
+               
+                seedIndexLocation = slotIndex;
 
-                    // Breaks the for loop
-                    slotIndex = inventory.getSize();
-                }
+                break;
             }
         }
 
@@ -91,7 +86,6 @@ public class BreakEvent implements Listener {
                 seedItemStack.setAmount(seedAmount - 1);
             }
         }
-
     }
 
     /**
@@ -101,17 +95,18 @@ public class BreakEvent implements Listener {
      * @return Material type of the seed
      */
     public Material getSeedMaterial(Material cropBlockType) {
-        if (cropBlockType == Material.WHEAT) {
-            return Material.WHEAT_SEEDS;
-        } else if (cropBlockType == Material.POTATOES) {
-            return Material.POTATO;
-        } else if (cropBlockType == Material.CARROTS) {
-            return Material.CARROT;
-        } else if (cropBlockType == Material.BEETROOTS) {
-            return Material.BEETROOT_SEEDS;
+        switch(cropBlockType){
+            case WHEAT: 
+                return Material.WHEAT_SEEDS;
+            case POTATOES: 
+                return Material.POTATO;
+            case CARROTS: 
+                return Material.CARROT;
+            case BEETROOTS: 
+                return Material.BEETROOT_SEEDS;
+            default: 
+                return Material.WHEAT_SEEDS;
         }
-        // Default condition, should not be reached
-        return Material.WHEAT_SEEDS;
     }
 
     /**
@@ -121,16 +116,7 @@ public class BreakEvent implements Listener {
      * @return true if the player has the appropriate seed in their inventory
      */
     public boolean isSeedInInventory(PlayerInventory inventory, Material cropBlockType) {
-        if (cropBlockType == Material.WHEAT) {
-            return inventory.contains(Material.WHEAT_SEEDS);
-        } else if (cropBlockType == Material.POTATOES) {
-            return inventory.contains(Material.POTATO);
-        } else if (cropBlockType == Material.CARROTS) {
-            return inventory.contains(Material.CARROT);
-        }else if (cropBlockType == Material.BEETROOTS) {
-            return inventory.contains(Material.BEETROOT_SEEDS);
-        }
-        return false;
+        return inventory.contains(getSeedMaterial(cropBlockType));
     }
 
     /**
