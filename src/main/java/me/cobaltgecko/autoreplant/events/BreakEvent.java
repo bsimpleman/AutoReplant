@@ -33,10 +33,18 @@ public class BreakEvent implements Listener {
         if (player.hasPermission("AutoReplant.replant")) {
             // Get the type of the broken block
             switch(block.getType()) {
-                case WHEAT: cropBlockType = Material.WHEAT;
-                case POTATOES: cropBlockType = Material.POTATOES;
-                case CARROTS: cropBlockType = Material.CARROTS;
-                case BEETROOTS: cropBlockType = Material.BEETROOTS;
+                case WHEAT: 
+                    cropBlockType = Material.WHEAT;
+                    break;
+                case POTATOES: 
+                    cropBlockType = Material.POTATOES;
+                    break;
+                case CARROTS:
+                    cropBlockType = Material.CARROTS;
+                    break;
+                case BEETROOTS: 
+                   cropBlockType = Material.BEETROOTS;
+                    break;
             }
 
             // Main functionality of the plugin
