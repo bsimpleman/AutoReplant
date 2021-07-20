@@ -1,23 +1,30 @@
 package me.cobaltgecko.autoreplant.events;
 
-import me.cobaltgecko.autoreplant.AutoReplant;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.event.block.Action;
 
+import me.cobaltgecko.autoreplant.AutoReplant;
 public class BreakEvent implements Listener {
 
+
     @EventHandler
-    public void breakEvent(BlockBreakEvent e) {
-        Block block = e.getBlock();
+    public void cropEvent(PlayerInteractEvent e) {
+        if(!e.hasBlock() || e.getAction() != Action.RIGHT_CLICK_BLOCK)
+            return;
+        Block block = e.getClickedBlock();
         Player player = e.getPlayer();
         PlayerInventory inventory = player.getInventory();
         Material cropBlockType = null;
@@ -38,9 +45,16 @@ public class BreakEvent implements Listener {
             // Main functionality of the plugin
             if (cropBlockType != null && isFullyGrown(block)) {
                 Material seedType = getSeedMaterial(cropBlockType);
-                if (isSeedInInventory(inventory, cropBlockType)) {
+                //this makes sure that the seeds are in the main hand (also prevents the function from being called twice)
+                if ( e.getHand() == EquipmentSlot.HAND && e.getItem() != null && e.getItem().getType() == seedType) {
                     removeSeed(inventory, seedType);
-                    replantCrop(block.getLocation(), cropBlockType);
+                    
+                    player.swingMainHand();
+                    // breaks the crop and plays the respective sound
+                    player.breakBlock(block);
+                    player.playSound(block.getLocation(), Sound.BLOCK_CROP_BREAK , SoundCategory.BLOCKS, 1.0f, 1.0f);
+
+                    replantCrop(block.getLocation(), cropBlockType, player);
                 }
             }
         }
@@ -139,9 +153,10 @@ public class BreakEvent implements Listener {
      * @param location Location of the crop that was broken
      * @param cropBlockType Type of crop that was broken
      */
-    public void replantCrop(Location location, Material cropBlockType) {
+    public void replantCrop(Location location, Material cropBlockType, Player player) {
+        location.getBlock().setType(cropBlockType);
         Bukkit.getScheduler().runTaskLater(AutoReplant.getInstance(), () -> {
-            location.getBlock().setType(cropBlockType);
-        }, 20L);
+            player.playSound(location, Sound.ITEM_CROP_PLANT , SoundCategory.BLOCKS, 1.0f, 1.0f);
+        }, 5L);
     }
 }
