@@ -1,23 +1,30 @@
 package me.cobaltgecko.autoreplant.events;
 
-import me.cobaltgecko.autoreplant.AutoReplant;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.event.block.Action;
 
+import me.cobaltgecko.autoreplant.AutoReplant;
 public class BreakEvent implements Listener {
 
+
     @EventHandler
-    public void breakEvent(BlockBreakEvent e) {
-        Block block = e.getBlock();
+    public void cropEvent(PlayerInteractEvent e) {
+        if(!e.hasBlock() || e.getAction() != Action.RIGHT_CLICK_BLOCK)
+            return;
+        Block block = e.getClickedBlock();
         Player player = e.getPlayer();
         PlayerInventory inventory = player.getInventory();
         Material cropBlockType = null;
@@ -25,22 +32,36 @@ public class BreakEvent implements Listener {
         // Check if the player has permission to replant
         if (player.hasPermission("AutoReplant.replant")) {
             // Get the type of the broken block
-            if (block.getType() == Material.WHEAT) {
-                cropBlockType = Material.WHEAT;
-            } else if (block.getType() == Material.POTATOES) {
-                cropBlockType = Material.POTATOES;
-            } else if (block.getType() == Material.CARROTS) {
-                cropBlockType = Material.CARROTS;
-            } else if (block.getType() == Material.BEETROOTS) {
-                cropBlockType = Material.BEETROOTS;
+            switch(block.getType()) {
+                case WHEAT: 
+                    cropBlockType = Material.WHEAT;
+                    break;
+                case POTATOES: 
+                    cropBlockType = Material.POTATOES;
+                    break;
+                case CARROTS:
+                    cropBlockType = Material.CARROTS;
+                    break;
+                case BEETROOTS: 
+                    cropBlockType = Material.BEETROOTS;
+                    break;
+                case NETHER_WART:
+                    cropBlockType = Material.NETHER_WART;
             }
 
             // Main functionality of the plugin
             if (cropBlockType != null && isFullyGrown(block)) {
                 Material seedType = getSeedMaterial(cropBlockType);
-                if (isSeedInInventory(inventory, cropBlockType)) {
+                //this makes sure that the seeds are in the main hand (also prevents the function from being called twice)
+                if ( e.getHand() == EquipmentSlot.HAND && e.getItem() != null && e.getItem().getType() == seedType) {
                     removeSeed(inventory, seedType);
-                    replantCrop(block.getLocation(), cropBlockType);
+                    
+                    player.swingMainHand();
+                    // breaks the crop and plays the respective sound
+                    player.breakBlock(block);
+                    player.playSound(block.getLocation(), Sound.BLOCK_CROP_BREAK , SoundCategory.BLOCKS, 1.0f, 1.0f);
+
+                    replantCrop(block.getLocation(), cropBlockType, player);
                 }
             }
         }
@@ -59,13 +80,11 @@ public class BreakEvent implements Listener {
         // For loop to find the location of seeds in the player's inventory
         for (int slotIndex = 0; slotIndex < inventory.getSize(); slotIndex++) {
             currentItems = inventory.getItem(slotIndex);
-            if (currentItems != null) {
-                if (currentItems.getType() == seedType) {
-                    seedIndexLocation = slotIndex;
+            if (currentItems != null && currentItems.getType() == seedType) {
+               
+                seedIndexLocation = slotIndex;
 
-                    // Breaks the for loop
-                    slotIndex = inventory.getSize();
-                }
+                break;
             }
         }
 
@@ -77,7 +96,6 @@ public class BreakEvent implements Listener {
                 seedItemStack.setAmount(seedAmount - 1);
             }
         }
-
     }
 
     /**
@@ -87,17 +105,20 @@ public class BreakEvent implements Listener {
      * @return Material type of the seed
      */
     public Material getSeedMaterial(Material cropBlockType) {
-        if (cropBlockType == Material.WHEAT) {
-            return Material.WHEAT_SEEDS;
-        } else if (cropBlockType == Material.POTATOES) {
-            return Material.POTATO;
-        } else if (cropBlockType == Material.CARROTS) {
-            return Material.CARROT;
-        } else if (cropBlockType == Material.BEETROOTS) {
-            return Material.BEETROOT_SEEDS;
+        switch(cropBlockType){
+            case WHEAT: 
+                return Material.WHEAT_SEEDS;
+            case POTATOES: 
+                return Material.POTATO;
+            case CARROTS: 
+                return Material.CARROT;
+            case BEETROOTS: 
+                return Material.BEETROOT_SEEDS;
+            case NETHER_WART:
+                return Material.NETHER_WART;
+            default: 
+                return Material.WHEAT_SEEDS;
         }
-        // Default condition, should not be reached
-        return Material.WHEAT_SEEDS;
     }
 
     /**
@@ -107,16 +128,7 @@ public class BreakEvent implements Listener {
      * @return true if the player has the appropriate seed in their inventory
      */
     public boolean isSeedInInventory(PlayerInventory inventory, Material cropBlockType) {
-        if (cropBlockType == Material.WHEAT) {
-            return inventory.contains(Material.WHEAT_SEEDS);
-        } else if (cropBlockType == Material.POTATOES) {
-            return inventory.contains(Material.POTATO);
-        } else if (cropBlockType == Material.CARROTS) {
-            return inventory.contains(Material.CARROT);
-        }else if (cropBlockType == Material.BEETROOTS) {
-            return inventory.contains(Material.BEETROOT_SEEDS);
-        }
-        return false;
+        return inventory.contains(getSeedMaterial(cropBlockType));
     }
 
     /**
@@ -139,9 +151,10 @@ public class BreakEvent implements Listener {
      * @param location Location of the crop that was broken
      * @param cropBlockType Type of crop that was broken
      */
-    public void replantCrop(Location location, Material cropBlockType) {
+    public void replantCrop(Location location, Material cropBlockType, Player player) {
+        location.getBlock().setType(cropBlockType);
         Bukkit.getScheduler().runTaskLater(AutoReplant.getInstance(), () -> {
-            location.getBlock().setType(cropBlockType);
-        }, 20L);
+            player.playSound(location, Sound.ITEM_CROP_PLANT , SoundCategory.BLOCKS, 1.0f, 1.0f);
+        }, 5L);
     }
 }
