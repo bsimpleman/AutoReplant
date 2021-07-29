@@ -43,8 +43,10 @@ public class BreakEvent implements Listener {
                     cropBlockType = Material.CARROTS;
                     break;
                 case BEETROOTS: 
-                   cropBlockType = Material.BEETROOTS;
+                    cropBlockType = Material.BEETROOTS;
                     break;
+                case NETHER_WART:
+                    cropBlockType = Material.NETHER_WART;
             }
 
             // Main functionality of the plugin
@@ -112,6 +114,8 @@ public class BreakEvent implements Listener {
                 return Material.CARROT;
             case BEETROOTS: 
                 return Material.BEETROOT_SEEDS;
+            case NETHER_WART:
+                return Material.NETHER_WART;
             default: 
                 return Material.WHEAT_SEEDS;
         }
