@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Autoreplant.iml" filepath="$PROJECT_DIR$/Autoreplant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AutoReplant.iml" filepath="$PROJECT_DIR$/AutoReplant.iml" />
     </modules>
   </component>
 </project>

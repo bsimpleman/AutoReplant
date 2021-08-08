@@ -4,11 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53bd0775-102b-4834-b79d-5a50cbb8a639" name="Changes" comment="" />
+    <list default="true" id="a9819ff6-a257-4380-b9db-e10c55a5a0b1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/${project.build.directory}/classes/plugin.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/spigot_1_17_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutoReplant.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AutoReplant.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AutoReplant/me/cobaltgecko/autoreplant/AutoReplant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AutoReplant/me/cobaltgecko/autoreplant/events/BreakEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/AutoReplant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/AutoReplant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -18,7 +41,7 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectId" id="1wQQR5vgJdxhTPSNaZwraMJDcIh" />
+  <component name="ProjectId" id="1wQTOnM28F7O05omlgULpbrW13f" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -28,11 +51,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RunManager">
-    <configuration name="Autoreplant build" type="MavenRunConfiguration" factoryName="Maven">
+    <configuration name="AutoReplant build" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings">
           <MavenGeneralSettings>
@@ -94,12 +115,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="53bd0775-102b-4834-b79d-5a50cbb8a639" name="Changes" comment="" />
-      <created>1628388322811</created>
+      <changelist id="a9819ff6-a257-4380-b9db-e10c55a5a0b1" name="Changes" comment="" />
+      <created>1628389785423</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1628388322811</updated>
-      <workItem from="1628388323973" duration="672000" />
+      <updated>1628389785423</updated>
+      <workItem from="1628389786758" duration="36000" />
+      <workItem from="1628389923162" duration="93000" />
     </task>
     <servers />
   </component>
