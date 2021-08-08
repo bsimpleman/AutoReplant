@@ -51,6 +51,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
     <configuration name="AutoReplant build" type="MavenRunConfiguration" factoryName="Maven">
@@ -121,7 +122,7 @@
       <option name="presentableId" value="Default" />
       <updated>1628389785423</updated>
       <workItem from="1628389786758" duration="36000" />
-      <workItem from="1628389923162" duration="93000" />
+      <workItem from="1628389923162" duration="2212000" />
     </task>
     <servers />
   </component>
