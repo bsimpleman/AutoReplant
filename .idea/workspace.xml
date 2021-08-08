@@ -16,6 +16,8 @@
       <change beforePath="$PROJECT_DIR$/out/production/AutoReplant/me/cobaltgecko/autoreplant/events/BreakEvent.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/AutoReplant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/AutoReplant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/events/BreakEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/events/BreakEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/util/CropHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/util/CropHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +28,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -122,11 +125,22 @@
       <option name="presentableId" value="Default" />
       <updated>1628389785423</updated>
       <workItem from="1628389786758" duration="36000" />
-      <workItem from="1628389923162" duration="2212000" />
+      <workItem from="1628389923162" duration="8753000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
