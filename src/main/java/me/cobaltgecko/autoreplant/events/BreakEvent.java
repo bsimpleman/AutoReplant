@@ -1,6 +1,7 @@
 package me.cobaltgecko.autoreplant.events;
 
 import me.cobaltgecko.autoreplant.AutoReplant;
+import me.cobaltgecko.autoreplant.util.CropHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,39 +13,38 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import java.util.Arrays;
 
 public class BreakEvent implements Listener {
 
+    private final Material[] cropList = {Material.WHEAT, Material.POTATOES, Material.CARROTS, Material.BEETROOTS};
+
     @EventHandler
-    public void breakEvent(BlockBreakEvent e) {
-        Block block = e.getBlock();
-        Player player = e.getPlayer();
+    public void breakEvent(BlockBreakEvent event) {
+        Player player = event.getPlayer();
+        if (!player.hasPermission("AutoReplant.replant")) {
+            return;
+        }
+
+        Block block = event.getBlock();
         PlayerInventory inventory = player.getInventory();
-        Material cropBlockType = null;
+        Material cropBlockType;
 
-        // Check if the player has permission to replant
-        if (player.hasPermission("AutoReplant.replant")) {
-            // Get the type of the broken block
-            if (block.getType() == Material.WHEAT) {
-                cropBlockType = Material.WHEAT;
-            } else if (block.getType() == Material.POTATOES) {
-                cropBlockType = Material.POTATOES;
-            } else if (block.getType() == Material.CARROTS) {
-                cropBlockType = Material.CARROTS;
-            } else if (block.getType() == Material.BEETROOTS) {
-                cropBlockType = Material.BEETROOTS;
-            }
-
+        // If the broken block is a crop then set cropBlockType to be the material type of the broken block
+        if (Arrays.asList(cropList).contains(block.getType())) {
+            cropBlockType = block.getType();
+        } else {
+            return;
+        }
             // Main functionality of the plugin
-            if (cropBlockType != null && isFullyGrown(block)) {
-                Material seedType = getSeedMaterial(cropBlockType);
-                if (isSeedInInventory(inventory, cropBlockType)) {
+            if (isFullyGrown(block)) {
+                Material seedType = CropHandler.getSeedFromCrop(cropBlockType);
+                if (inventory.contains(seedType)) {
                     removeSeed(inventory, seedType);
                     replantCrop(block.getLocation(), cropBlockType);
                 }
             }
         }
-    }
 
     /**
      * Removes a specified amount of seeds of the appropriate seed type for every replant
@@ -56,7 +56,7 @@ public class BreakEvent implements Listener {
         int seedIndexLocation = -1;
         ItemStack currentItems;
 
-        // For loop to find the location of seeds in the player's inventory
+        // Loop to find the location of seeds in the player's inventory
         for (int slotIndex = 0; slotIndex < inventory.getSize(); slotIndex++) {
             currentItems = inventory.getItem(slotIndex);
             if (currentItems != null) {
@@ -78,45 +78,6 @@ public class BreakEvent implements Listener {
             }
         }
 
-    }
-
-    /**
-     * Checks what type of block was broken to return the appropriate seed
-     *
-     * @param cropBlockType Block type of the crop being replanted
-     * @return Material type of the seed
-     */
-    public Material getSeedMaterial(Material cropBlockType) {
-        if (cropBlockType == Material.WHEAT) {
-            return Material.WHEAT_SEEDS;
-        } else if (cropBlockType == Material.POTATOES) {
-            return Material.POTATO;
-        } else if (cropBlockType == Material.CARROTS) {
-            return Material.CARROT;
-        } else if (cropBlockType == Material.BEETROOTS) {
-            return Material.BEETROOT_SEEDS;
-        }
-        // Default condition, should not be reached
-        return Material.WHEAT_SEEDS;
-    }
-
-    /**
-     *
-     * @param inventory Inventory of the player who broke the block
-     * @param cropBlockType Material type of the block that was broken
-     * @return true if the player has the appropriate seed in their inventory
-     */
-    public boolean isSeedInInventory(PlayerInventory inventory, Material cropBlockType) {
-        if (cropBlockType == Material.WHEAT) {
-            return inventory.contains(Material.WHEAT_SEEDS);
-        } else if (cropBlockType == Material.POTATOES) {
-            return inventory.contains(Material.POTATO);
-        } else if (cropBlockType == Material.CARROTS) {
-            return inventory.contains(Material.CARROT);
-        }else if (cropBlockType == Material.BEETROOTS) {
-            return inventory.contains(Material.BEETROOT_SEEDS);
-        }
-        return false;
     }
 
     /**
