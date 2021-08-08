@@ -1,0 +1,6 @@
+name: Autoreplant
+version: ${project.version}
+main: me.cobaltgecko.autoreplant.Autoreplant
+api-version: 1.17
+authors: [CobaltGecko]
+description: A plugin for allowing players to automatically replant crops

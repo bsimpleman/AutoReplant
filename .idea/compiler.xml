@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Autoreplant" target="1.8" />
+      <module name="Autoreplant" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
