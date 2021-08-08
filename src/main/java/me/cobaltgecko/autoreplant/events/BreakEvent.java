@@ -1,7 +1,7 @@
 package me.cobaltgecko.autoreplant.events;
 
 import me.cobaltgecko.autoreplant.AutoReplant;
-import me.cobaltgecko.autoreplant.util.CropHandler;
+import me.cobaltgecko.autoreplant.CropHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,10 +14,11 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import java.util.Arrays;
+import java.util.List;
 
 public class BreakEvent implements Listener {
 
-    private final Material[] cropList = {Material.WHEAT, Material.POTATOES, Material.CARROTS, Material.BEETROOTS};
+    private final List<Material> cropList = Arrays.asList(Material.WHEAT, Material.POTATOES, Material.CARROTS, Material.BEETROOTS);
 
     @EventHandler
     public void breakEvent(BlockBreakEvent event) {
@@ -31,7 +32,7 @@ public class BreakEvent implements Listener {
         Material cropBlockType;
 
         // If the broken block is a crop then set cropBlockType to be the material type of the broken block
-        if (Arrays.asList(cropList).contains(block.getType())) {
+        if (cropList.contains(block.getType())) {
             cropBlockType = block.getType();
         } else {
             return;
@@ -62,9 +63,7 @@ public class BreakEvent implements Listener {
             if (currentItems != null) {
                 if (currentItems.getType() == seedType) {
                     seedIndexLocation = slotIndex;
-
-                    // Breaks the for loop
-                    slotIndex = inventory.getSize();
+                    break;
                 }
             }
         }

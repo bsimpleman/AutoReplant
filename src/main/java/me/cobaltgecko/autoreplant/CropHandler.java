@@ -1,4 +1,4 @@
-package me.cobaltgecko.autoreplant.util;
+package me.cobaltgecko.autoreplant;
 
 import org.bukkit.Material;
 
@@ -7,14 +7,9 @@ import java.util.Map;
 
 public class CropHandler {
 
-    /** Mappings of all crops to their respective seed **/
     private static final Map<Material, Material> cropToSeedMap = new HashMap<>();
 
     static {
-        initMap();
-    }
-
-    private static void initMap() {
         cropToSeedMap.put(Material.WHEAT, Material.WHEAT_SEEDS);
         cropToSeedMap.put(Material.POTATOES, Material.POTATO);
         cropToSeedMap.put(Material.CARROTS, Material.CARROT);
@@ -33,6 +28,4 @@ public class CropHandler {
         }
         return null;
     }
-
-
 }
