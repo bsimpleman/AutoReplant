@@ -17,7 +17,7 @@ public final class AutoReplant extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        // Plugin disable logic
     }
 
     public static Plugin getInstance() {
