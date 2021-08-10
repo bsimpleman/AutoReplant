@@ -23,9 +23,6 @@ public class BreakEvent implements Listener {
     @EventHandler
     public void breakEvent(BlockBreakEvent event) {
         Player player = event.getPlayer();
-        if (!player.hasPermission("AutoReplant.replant")) {
-            return;
-        }
 
         Block block = event.getBlock();
         PlayerInventory inventory = player.getInventory();
@@ -37,6 +34,12 @@ public class BreakEvent implements Listener {
         } else {
             return;
         }
+
+        // Check if player has permission to replant the given crop
+        if (!hasPermissionsToReplantCrop(player, cropBlockType)) {
+            return;
+        }
+
             // Main functionality of the plugin
             if (isFullyGrown(block)) {
                 Material seedType = CropHandler.getSeedFromCrop(cropBlockType);
@@ -91,6 +94,21 @@ public class BreakEvent implements Listener {
         int maximumAge = ageable.getMaximumAge();
 
         return ageable.getAge() == maximumAge;
+    }
+
+    /**
+     * Checks whether or not the player has the necessary permissions to replant a crop
+     *
+     * @param player Player who has broken a crop
+     * @param cropBlockType Material type of the broken crop
+     * @return true if the player has permissions to replant the crop they have broken
+     */
+    public boolean hasPermissionsToReplantCrop(Player player, Material cropBlockType) {
+        // String that defines the proper permission needed for a player to replant each crop type
+        String cropPermission = CropHandler.getPermissionStringForCrop(cropBlockType);
+
+        // Check if player has the proper permissions
+        return player.hasPermission("AutoReplant.replant.all") || player.hasPermission(cropPermission);
     }
 
     /**
