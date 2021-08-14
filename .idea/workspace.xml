@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9819ff6-a257-4380-b9db-e10c55a5a0b1" name="Changes" comment="Changes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/Crops.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/Metrics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/CropHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/CropHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/events/BreakEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/events/BreakEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/AutoReplant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/AutoReplant.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +25,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -117,7 +126,8 @@
       <workItem from="1628389786758" duration="36000" />
       <workItem from="1628389923162" duration="12479000" />
       <workItem from="1628488150778" duration="16000" />
-      <workItem from="1628489632327" duration="2100000" />
+      <workItem from="1628489632327" duration="5091000" />
+      <workItem from="1628647569414" duration="4495000" />
     </task>
     <servers />
   </component>
@@ -135,5 +145,16 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/CropHandler.java</url>
+          <line>8</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
