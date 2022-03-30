@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a9819ff6-a257-4380-b9db-e10c55a5a0b1" name="Changes" comment="Changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/CropHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/CropHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/events/BreakEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/cobaltgecko/autoreplant/events/BreakEvent.java" afterDir="false" />
+=======
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +46,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Elevators" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
@@ -117,7 +120,13 @@
       <workItem from="1628389786758" duration="36000" />
       <workItem from="1628389923162" duration="12479000" />
       <workItem from="1628488150778" duration="16000" />
+<<<<<<< Updated upstream
       <workItem from="1628489632327" duration="2100000" />
+=======
+      <workItem from="1628489632327" duration="5091000" />
+      <workItem from="1628647569414" duration="4495000" />
+      <workItem from="1628905023324" duration="1747000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>

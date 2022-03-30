@@ -2,11 +2,14 @@ package me.cobaltgecko.autoreplant.events;
 
 import me.cobaltgecko.autoreplant.AutoReplant;
 import me.cobaltgecko.autoreplant.CropHandler;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.data.Ageable;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Directional;
+import org.bukkit.block.data.type.Cocoa;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,7 +21,7 @@ import java.util.List;
 
 public class BreakEvent implements Listener {
 
-    private final List<Material> cropList = Arrays.asList(Material.WHEAT, Material.POTATOES, Material.CARROTS, Material.BEETROOTS);
+    private final List<Material> cropList = Arrays.asList(Material.WHEAT, Material.POTATOES, Material.CARROTS, Material.BEETROOTS, Material.NETHER_WART, Material.COCOA);
 
     @EventHandler
     public void breakEvent(BlockBreakEvent event) {
@@ -45,7 +48,7 @@ public class BreakEvent implements Listener {
                 Material seedType = CropHandler.getSeedFromCrop(cropBlockType);
                 if (inventory.contains(seedType)) {
                     removeSeed(inventory, seedType);
-                    replantCrop(block.getLocation(), cropBlockType);
+                    replantCrop(block.getLocation(), cropBlockType, player);
                 }
             }
         }
@@ -117,9 +120,17 @@ public class BreakEvent implements Listener {
      * @param location Location of the crop that was broken
      * @param cropBlockType Type of crop that was broken
      */
-    public void replantCrop(Location location, Material cropBlockType) {
+    public void replantCrop(Location location, Material cropBlockType, Player player) {
+        BlockData blockData = location.getBlock().getBlockData();
+        Directional direction = (Directional) blockData;
+        BlockFace originalOrientation = direction.getFacing();
         Bukkit.getScheduler().runTaskLater(AutoReplant.getInstance(), () -> {
             location.getBlock().setType(cropBlockType);
+            BlockData newBlockData = location.getBlock().getBlockData();
+            Directional newDirection = (Directional) newBlockData;
+            newDirection.setFacing(originalOrientation);
+            location.getBlock().setBlockData(newDirection);
+            player.playSound(location, Sound.BLOCK_CHORUS_FLOWER_GROW, SoundCategory.BLOCKS, 1.0f, 1.0f);
         }, 20L);
     }
 }

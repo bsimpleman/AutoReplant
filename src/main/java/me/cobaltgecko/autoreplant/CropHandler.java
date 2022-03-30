@@ -16,16 +16,22 @@ public class CropHandler {
         cropToSeedMap.put(Material.POTATOES, Material.POTATO);
         cropToSeedMap.put(Material.CARROTS, Material.CARROT);
         cropToSeedMap.put(Material.BEETROOTS, Material.BEETROOT_SEEDS);
+        cropToSeedMap.put(Material.NETHER_WART, Material.NETHER_WART);
+        cropToSeedMap.put(Material.COCOA, Material.COCOA_BEANS);
 
         seedToCropMap.put(Material.WHEAT_SEEDS, Material.WHEAT);
         seedToCropMap.put(Material.POTATO, Material.POTATOES);
         seedToCropMap.put(Material.CARROT, Material.CARROTS);
         seedToCropMap.put(Material.BEETROOT_SEEDS, Material.BEETROOTS);
+        seedToCropMap.put(Material.NETHER_WART, Material.NETHER_WART);
+        seedToCropMap.put(Material.COCOA_BEANS, Material.COCOA);
 
         cropToPermissionMap.put(Material.WHEAT, "AutoReplant.replant.wheat");
         cropToPermissionMap.put(Material.POTATOES, "AutoReplant.replant.potato");
         cropToPermissionMap.put(Material.CARROTS, "AutoReplant.replant.carrot");
         cropToPermissionMap.put(Material.BEETROOTS, "AutoReplant.replant.beetroot");
+        cropToPermissionMap.put(Material.NETHER_WART, "AutoReplant.replant.netherwart");
+        cropToPermissionMap.put(Material.COCOA, "AutoReplant.replant.cocoa");
     }
 
     public static Material getSeedFromCrop(Material crop) {
